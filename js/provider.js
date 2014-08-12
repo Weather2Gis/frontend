@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    
+
 });
 
 function provider(provider_id, north_west_x, north_west_y, south_east_x, south_east_y, zoom)

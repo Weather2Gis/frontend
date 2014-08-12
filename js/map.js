@@ -1,5 +1,3 @@
-var map;
-
 DG.then(function () {
     map = DG.map('map', {
         "center": [54.98, 82.89],
@@ -11,7 +9,15 @@ DG.then(function () {
     //DG.marker([54.93454, 82.78009]).addTo(map);
     DG.marker([54.93454, 82.99982]).addTo(map);
 
-    var temp = map.getBounds();
-    var a = temp.getNorthWest(); // Левая верхняя точка
-    var b = temp.getSouthEast(); // Правая нижняя точка
+
     });
+
+function getMapData()
+{
+    var temp = map.getBounds();
+    return temp.getNorthWest(); // Левая верхняя точка
+    //var b = temp.getSouthEast(); // Правая нижняя точка
+
+
+    // TODO: тут получать данные из карты.
+}
