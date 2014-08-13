@@ -12,6 +12,6 @@ DG.then(function () {
         var north_west = current_map_position.getNorthWest(); // Получаем координаты левой верхней точки
         var south_east = current_map_position.getSouthEast(); // Получаем координаты правой нижней точки
 
-        var weather_data = provider(1, north_west.lng, north_west.lat, south_east.lng, south_east.lat);
+        var weather_data = provider(1, north_west.lng, north_west.lat, south_east.lng, south_east.lat, 1);
     });
 });
