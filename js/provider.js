@@ -23,11 +23,11 @@ function provider(provider_id, north_west_x, north_west_y, south_east_x, south_e
         'lat_bottom=' + south_east_y;
 
     $.ajax({
-        dataType: "jsonp",
-        url:      test_host,
-        async:      false,
-        jsonp: false,
-        jsonpCallback: "callback",
+        dataType:       "jsonp",
+        url:            test_host,
+        async:          false,
+        jsonp:          false,
+        jsonpCallback:  "callback",
         success:  function(data)
         {
             callback(data);
