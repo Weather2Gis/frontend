@@ -4,7 +4,6 @@ function getcity(city, callback)
     var host = 'http://10.54.71.69/weather.php?r=weather/find&city=' + city;
 	           // по окончанию загрузки страницы
 
-
         $.ajax({
             dataType: "jsonp",
             url:      host,
