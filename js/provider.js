@@ -2,10 +2,11 @@
 * Функция, которая по двум координатам и провайдеру возвращает
 * JSON массов с данными погоды по каждой метеостанции
  */
-function provider(provider_id, north_west_x, north_west_y, south_east_x, south_east_y, zoom)
+function provider(provider_id, north_west_x, north_west_y, south_east_x, south_east_y, zoom, callback)
 {
     var host = 'http://10.54.71.69/weather.php?r=weather/find&';
     var good_host = 'http://10.54.71.69?';
+    var test_host = "http://weather7.apiary-mock.com/api/moscow";
 
     var good_url = good_host +
         'provider_id=' + provider_id + '&' +
@@ -23,10 +24,18 @@ function provider(provider_id, north_west_x, north_west_y, south_east_x, south_e
 
     $.ajax({
         dataType: "jsonp",
-        url:      url,
+        url:      test_host,
+        async:      false,
+        jsonp: false,
+        jsonpCallback: "callback",
         success:  function(data)
         {
-            // Тут как-то возвращаем массив с данными.
+            callback(data);
+        },
+        error: function(data)
+        {
+            callback(data);
         }
     });
+
 }
