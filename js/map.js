@@ -1,16 +1,15 @@
 DG.then(function () {
-    var southWest = DG.latLng(80.179, 23.906),
-        northEast = DG.latLng(39.096, 190.898),
-        bounds = DG.latLngBounds(southWest, northEast);
+
+    var markers = DG.featureGroup();
 
     var map = DG.map('map', {
-        "center": [54.98, 82.89],
-        "zoom": 10,
-        "fullscreenControl" : false,
-        "zoomControl" : false,
-        "minZoom" : 4,
-        "maxZoom" : 12,
-        "maxBounds" : bounds
+        "center":               [54.98, 82.89],
+        "zoom":                 10,
+        "fullscreenControl" :   false,
+        "zoomControl" :         false,
+        "minZoom" :             4,
+        "maxZoom" :             12,
+        "maxBounds" :           DG.latLngBounds(DG.latLng(80.179, 23.906), DG.latLng(39.096, 190.898))
     });
 
     /*var markers = DG.featureGroup(), markers_1 = DG.featureGroup(),
@@ -39,27 +38,52 @@ DG.then(function () {
      $.each(data, function(ws_num, ws_data) {
      // Вот тут добавляем маркеры на слой и добавляем их к карте
      });
-
-
      map.fitBounds(markers.getBounds());*/
 
-    var markers = DG.featureGroup();
+
+
+    // Вешаем на событие «нажатие на кнопку поиска» обработчик
+    // Получаем через API координаты по городу и перемещаем карту в это город
+    $('.search__submit').bind('click', function() {
+        var city = $(".search__input").val();
+
+        getCity(city, function(data) {
+            map.panTo(DG.latLng(data.latitude, data.longitude));
+            map.setZoom(11);
+        });
+    });
+
+    $('.search__input').bind('submit', function() {
+        var city = $(".search__input").val();
+
+        getCity(city, function(data) {
+            map.panTo(DG.latLng(data.latitude, data.longitude));
+            map.setZoom(11);
+        });
+    });
+
+
 
     // Вешаем на собития перемещения карты, изменения зума и изменения размера окна подгрузку новых данных
-    map.on('resize movestart viewreset', function (e) {
+    map.on('load resize movestart viewreset', function () {
         var current_map_position = map.getBounds();
         var north_west = current_map_position.getNorthWest(); // Получаем координаты левой верхней точки
         var south_east = current_map_position.getSouthEast(); // Получаем координаты правой нижней точки
 
         provider(markers, 1, north_west.lng, north_west.lat, south_east.lng, south_east.lat, 1, function(data, markers) {
+            var coordinates = [];
             markers.clearLayers();
 
-            var coordinates = [];
-            coordinates[0] = 54.98 + Math.random();
-            coordinates[1] = 82.89 + Math.random();
-            DG.marker(coordinates).addTo(markers);
+            $.each(data, function(ws_num, ws_data) {
+                coordinates[0] = ws_data.latitude;
+                coordinates[1] = ws_data.longitude;
+                DG.marker(coordinates).addTo(markers).bindLabel(ws_data.weathers[0].temp, {
+                    static: false
+                });
+            });
 
             markers.addTo(map);
         });
     });
+
 });
