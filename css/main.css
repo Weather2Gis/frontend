@@ -26,10 +26,10 @@ body {
 /* Стили меню */
 .menu {
     height: 40px;
-    width: 250px;
+    width: 280px;
     left: 40px;
     position: absolute;
-    top: 40px;
+    top: 81px;
     z-index: 1;
     border-radius: 2px;
     background: rgba(51,51,51,.9);
@@ -56,10 +56,10 @@ body {
 /* Стили поиска */
 .search {
     height: 40px;
-    width: 250px;
+    width: 280px;
     left: 40px;
     position: absolute;
-    top: 121px;
+    top: 40px;
     z-index: 1;
     border-radius: 2px;
     background: rgba(51,51,51,.9);
@@ -68,19 +68,25 @@ body {
 
 .search__input {
     height: 30px;
-    width: 190px;
+    width: 205px;
     margin: 5px 5px;
     box-sizing: border-box;
     padding: 10px;
     font-size: 16pt;
+    border-radius: 4px;
+    border: 0px;
+    background-color: rgba(255, 255, 255, 0.95)
 }
 
 .search__submit {
     display: inline-block;
     box-sizing: border-box;
     height: 20px;
-    width: 40px;
+    width: 52px;
     margin: 5px 0px;
     color: #f0f0f0;
     font: 16px/16px Helvetica,Arial,sans-serif;
+    border: 0;
+    background-color: rgba(0,0,0,0);
+    padding: 0px;
 }
