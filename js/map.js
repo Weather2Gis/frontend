@@ -36,10 +36,14 @@ DG.then(function () {
 
      document.getElementById("hide").onclick = hideMarkers;
      document.getElementById("show").onclick = showMarkers;
+     $.each(data, function(ws_num, ws_data) {
+     // Вот тут добавляем маркеры на слой и добавляем их к карте
+     });
 
 
      map.fitBounds(markers.getBounds());*/
 
+    var markers = DG.featureGroup();
 
     // Вешаем на собития перемещения карты, изменения зума и изменения размера окна подгрузку новых данных
     map.on('resize movestart viewreset', function (e) {
@@ -47,10 +51,15 @@ DG.then(function () {
         var north_west = current_map_position.getNorthWest(); // Получаем координаты левой верхней точки
         var south_east = current_map_position.getSouthEast(); // Получаем координаты правой нижней точки
 
-        provider(1, north_west.lng, north_west.lat, south_east.lng, south_east.lat, 1, function(data) {
-            $.each(data, function(ws_num, ws_data) {
-                // Вот тут добавляем маркеры на слой и добавляем их к карте
-            });
+        provider(markers, 1, north_west.lng, north_west.lat, south_east.lng, south_east.lat, 1, function(data, markers) {
+            markers.clearLayers();
+
+            var coordinates = [];
+            coordinates[0] = 54.98 + Math.random();
+            coordinates[1] = 82.89 + Math.random();
+            DG.marker(coordinates).addTo(markers);
+
+            markers.addTo(map);
         });
     });
 });
