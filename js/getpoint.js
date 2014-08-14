@@ -11,9 +11,9 @@ DG.then(function () {
         var latitude = latitude;
         var city = $("#findcity").val();
         getcity(city, function(data) {
-            console.log(data);
-            map.panTo(DG.latLng(data.latitude, data.longitude));
-
-        });
+//            console.log(data);
+            map.panTo(DG.latLng(data[0].latitude, data[0].longitude));
+            map.setZoom(11);
+        })
     });
 });

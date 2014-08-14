@@ -21,7 +21,7 @@ body{
     font-size: 0px;
     font-family: Helvetica,Arial,sans-serif;
     line-height: 14px;
-    height: 50px;
+    height: 27px;
 }
 
 .searchBar__forms{
@@ -47,6 +47,7 @@ body{
     left: 190px;
     position: absolute;
     text-align: center;
+    color: #D0D0D1;
     top: 12;
     vertical-align: top;
     width: 50px;
@@ -64,7 +65,9 @@ body{
     display: inline-block;
     color: white;
 }
-.suggest__input{
-    background-color: white;
+input:focus{outline:none;}
+
+.search_color{
+    background-color: rgba(216, 216, 216, 0.9);
 
 }

@@ -1,12 +1,13 @@
 function getcity(city, callback)
 {
-	var test_host = 'http://weather7.apiary-mock.com/api/' + city;
+	//var host = 'http://weather7.apiary-mock.com/api/' + city;
+    var host = 'http://10.54.71.69/weather.php?r=weather/find&city=' + city;
 	           // по окончанию загрузки страницы
 
 
         $.ajax({
             dataType: "jsonp",
-            url:      test_host,
+            url:      host,
             async:      false,
             jsonp:      false,
             jsonpCallback: "callback",
@@ -16,7 +17,7 @@ function getcity(city, callback)
             },
             error: function(data)
             {
-                callback(err);
+                console.error(err);
             }
         });
 }
