@@ -5,6 +5,7 @@ DG.then(function () {
         "fullscreenControl" : false,
         "zoomControl" : false
     });
+
     $('.button_search').click(function(){
 
         var longitude = longitude;
