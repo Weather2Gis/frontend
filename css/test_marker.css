@@ -1,0 +1,32 @@
+ .big_marker{
+	width: 40px;
+	height: 40px;
+	z-index: 336;
+}
+
+.marker_cluster {
+	width: 30px;
+	height: 30px;
+	margin-left: 5px;
+	margin-top: 5px;
+	text-align: center;
+	color: white;
+	border-radius: 15px;
+	font: 13px "Helvetica Neue", Arial, Helvetica, sans-serif;
+	background-color: rgba(245, 255, 0, 0.6);
+}
+
+.clickable{
+	cursor: pointer;
+	display: block;
+}
+
+.marker-small{
+	background-color: rgba(0, 143, 255, 0.37);
+	position: relative;
+	display: block;
+	top: -2px;
+	left: -2px;
+	line-height: 30px;
+}
+
