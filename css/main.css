@@ -90,3 +90,35 @@ body {
     background-color: rgba(0,0,0,0);
     padding: 0px;
 }
+
+
+/* Стили карточек */
+.cardWeather {
+    position: absolute;
+    padding: 5px; /* Поля */
+    color: #f0f0f0;
+    word-wrap: break-word;
+    opacity: 0.7;
+    z-index: 1;
+}
+.cardWeather__city{
+    padding-top: 8px;
+    text-align: center;
+    font-size: 25px;
+}
+.cardWeather__temp {
+    text-align: right;
+    width: 95px;
+    height: 38px;
+    padding: 5px;
+    padding-top: 2px;
+    font-size: 38px;
+}
+.cardWeather__info{
+    padding: 10px;
+    padding-left: 30px;
+}
+.cardWeather__lieb {
+    text-align: center;
+    font-size: 11px;
+}
