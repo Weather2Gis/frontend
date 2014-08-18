@@ -77,13 +77,13 @@ DG.then(function () {
             $.each(data, function(ws_num, ws_data) {
                 coordinates[0] = ws_data.latitude;
                 coordinates[1] = ws_data.longitude;
-                console.log(ws_data);
-                DG.marker(coordinates).addTo(markers).bindPopup('<div class="cardWeather__city">' + ws_data.city.name_ru + '</div>' +
-                    '<div class="cardWeather__temp">' + ws_data.weathers[0].temp + '</div>' +
-                    '<div class="cardWeather__info">Влажность: ' + ws_data.weathers[0].humidity +
-                    '<br>Давление: ' + ws_data.weathers[0].pressure +
-                    '<br>Скорость ветра: '+ ws_data.weathers[0].wind_speed + 'м.с' +
-                     '<br>Направление ветра: ' + ws_data.weathers[0].wind_deg + '</div>').bindLabel(ws_data.weathers[0].temp, {
+                //console.log(ws_data);
+                DG.marker(coordinates).addTo(markers).bindPopup('<div class="cardWeather__city">' + ws_data.city + '</div>' +
+                    '<div class="cardWeather__temp">' + ws_data.temp + '</div>' +
+                    '<div class="cardWeather__info">Влажность: ' + ws_data.humidity +
+                    '<br>Давление: ' + ws_data.pressure +
+                    '<br>Скорость ветра: '+ ws_data.wind_speed + 'м.с' +
+                     '<br>Направление ветра: ' + ws_data.wind_deg + '</div>').bindLabel(ws_data.temp, {
                     'static': false
                 });
             });
