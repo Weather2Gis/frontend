@@ -1,6 +1,8 @@
 DG.then(function () {
 
     var markers = DG.featureGroup();
+    var zoom_url, center_url;
+    //getUrlData();
 
     var map = DG.map('map', {
         "center":               [54.98, 82.89],
@@ -12,34 +14,6 @@ DG.then(function () {
         "maxBounds" :           DG.latLngBounds(DG.latLng(80.179, 23.906), DG.latLng(39.096, 190.898))
     });
 
-    /*var markers = DG.featureGroup(), markers_1 = DG.featureGroup(),
-     coordinates_1 = [], coordinates = [];
-
-     for (i = 0; i < 100; i++) {
-     coordinates[0] = 54.98 + Math.random();
-     coordinates[1] = 82.89 + Math.random();
-     DG.marker(coordinates).addTo(markers);
-     }
-
-     var new_data, old_data;
-
-     var markers_old = DG.featureGroup(),
-     markers_1 = DG.featureGroup(),
-     coordinates_1 = [],
-     coordinates = [];
-
-     DG.marker(coordinates).addTo(markers_old);
-     markers_old.removeFrom(map);
-
-     markers.addTo(map);
-
-     document.getElementById("hide").onclick = hideMarkers;
-     document.getElementById("show").onclick = showMarkers;
-     $.each(data, function(ws_num, ws_data) {
-     // Вот тут добавляем маркеры на слой и добавляем их к карте
-     });
-     map.fitBounds(markers.getBounds());*/
-
 
 
     // Вешаем на событие «нажатие на кнопку поиска» обработчик
@@ -48,7 +22,7 @@ DG.then(function () {
         var city = $(".search__input").val();
 
         getCity(city, function(data) {
-            map.panTo(DG.latLng(data.latitude, data.longitude));
+            map.panTo(DG.latLng(data[0].latitude, data[0].longitude));
             map.setZoom(11);
         });
     });
@@ -57,7 +31,7 @@ DG.then(function () {
         var city = $(".search__input").val();
 
         getCity(city, function(data) {
-            map.panTo(DG.latLng(data.latitude, data.longitude));
+            map.panTo(DG.latLng(data[0].latitude, data[0].longitude));
             map.setZoom(11);
         });
     });
@@ -83,7 +57,7 @@ DG.then(function () {
                     '<div class="cardWeather__info">Влажность: ' + ws_data.humidity +
                     '<br>Давление: ' + ws_data.pressure +
                     '<br>Скорость ветра: '+ ws_data.wind_speed + 'м.с' +
-                     '<br>Направление ветра: ' + ws_data.wind_deg + '</div>').bindLabel(ws_data.temp, {
+                    '<br>Направление ветра: ' + ws_data.wind_deg + '</div>').bindLabel(ws_data.temp, {
                     'static': false
                 });
             });
