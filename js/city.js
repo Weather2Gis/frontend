@@ -7,8 +7,6 @@
 function getCity(city, callback)
 {
 
-    var host = 'http://95.85.32.183/weather/getCC?city=' + city;
-
     host = 'http://localhost/backend/?r=weather/find&pr=ya&city=' + city;
 
     $.ajax({

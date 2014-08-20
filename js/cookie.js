@@ -15,9 +15,7 @@ function getProviderCookie() {
  * Берем выбранное пользователем значение provider и записываем их в куки
  * Вызывается каждый раз, когда переключается меню
  */
-function setProviderCookie() {
-    var provider = $('input.search__input').val();
-    
+function setProviderCookie(provider) {
     var expires = new Date();
     expires.setTime(expires.getTime() + (1000 * 86400 * 365));
 

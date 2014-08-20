@@ -1,18 +1,17 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/html">
-    <head lang="en">
-        <title>Самый мощный агригатор погоды IN THE WORLD</title>
-        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
-        <link rel="icon" type="image/png" href=""/>
+<html lang="ru">
+    <head>
+        <title>Самый мощный агрегатор погоды IN THE WORLD</title>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+        <link rel="icon" type="image/png" href="">
 
         <!-- Подключаем JavaScript -->
         <script src="http://maps.api.2gis.ru/2.0/loader.js?pkg=full" data-id="dgLoader"></script>
         <script src="/frontend/js/jquery-1.11.1.js"></script>
-        <script src="/frontend/js/url_lib.js"></script>
         <script src="/frontend/js/url.js"></script>
+        <script src="/frontend/js/cookie.js"></script>
         <script src="/frontend/js/city.js"></script>
         <script src="/frontend/js/map.js"></script>
-        <script src="/frontend/js/menuToggle.js"></script>
         <script src="/frontend/js/provider.js"></script>
 
         <!-- Подключаем CSS -->
@@ -23,17 +22,18 @@
         <div class="application">
             <div id="map" class="map"></div>
 
-            <div class="menu _detailed">
+            <div class="menu">
                 <div class="menu__selectors">
-                    <div id="main_provider" class="selectors__button">Yandex</div>
-                    <div id="provider" class="selectors__button">OpenWeatherMap</div>
+                    <div id="ya" class="selectors__button _ya"></div>
+                    <div id="ow" class="selectors__button _ow"></div>
+                    <div id="wu" class="selectors__button _wu"></div>
                 </div>
             </div>
 
-            <form action="#" class="search">
-                <input class="search__input" type="text" name="" id="" />
-                <input type="submit" class="search__submit" value="Искать" />
-            </form>
+            <div class="search">
+                <input class="search__input" type="text" />
+                <div class="search__submit">Искать</div>
+            </div>
         </div>
     </body>
 </html>
