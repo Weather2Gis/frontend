@@ -20,12 +20,6 @@ Frontend:
 
 └── src (Значки)
 
-    ├── card (Иконки типов погоды)
-
-    ├── menu (логи провайдеров погоды)
-
-    └── favicon.ico
-    
 Запуск:    
   Что бы сборка работала нужно скачать две папки backend и frontend, и они должны лежать в одной деректории, иначе изменить путь в файлах frontend’е: css/main.css js/city.js js/provider.js  js/map.js index.html, и в них указать путь до папки backend.
     
