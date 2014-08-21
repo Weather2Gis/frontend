@@ -7,7 +7,6 @@
  */
 function provider(markers, provider_id, north_west_x, north_west_y, south_east_x, south_east_y, zoom, callback)
 {
-
     /*/
     var host = 'http://95.85.32.183/10.54.71.69/weather/find?';
 
@@ -23,7 +22,7 @@ function provider(markers, provider_id, north_west_x, north_west_y, south_east_x
     var host = 'http://localhost/backend/?r=weather/find&'
 
     var url = host +
-        'provider_id=' + provider_id + '&' +
+        'pr=' + provider_id + '&' +
         'lon_top=' + north_west_x + '&' +
         'lat_top=' + north_west_y + '&' +
         'lon_bottom=' + south_east_x + '&' +
