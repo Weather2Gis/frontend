@@ -132,7 +132,7 @@ DG.then(function () {
                     $('#card__city').empty().append($('#template_box_city').clone().html().replace("%city%", ws_data.city));
                     $('#card__weather').empty();
 
-                    setSidebar(ws_data.city, function(data) {
+                    setSidebar(ws_data.city, selectedProvider,function(data) {
                         for(i=0; i<4; i++) {
                             $('#template_box').children().attr("id", "box-" + i);
                             $('#card__weather').append($('#template_box').clone().html()
@@ -142,8 +142,8 @@ DG.then(function () {
                                 .replace("%pressure%", data[i].pressure)
                                 .replace("%wind_speed%", data[i].wind_speed));
 
-                            $('#box-' + i + '>.card__icon>img').attr('src', '/src/card/' + typeWeather[data[i].precipitation]);
-                            $('#box-' + i + ' .wind_deg').attr('src', '/src/card/' + windDeg[data[i].wind_deg]);
+                            $('#box-' + i + '>.card__icon>img').attr('src', '/frontend/src/card/' + typeWeather[data[i].precipitation]);
+                            $('#box-' + i + ' .wind_deg').attr('src', '/frontend/src/card/' + windDeg[data[i].wind_deg]);
                         }
                     });
 
@@ -163,9 +163,9 @@ DG.then(function () {
 
 
 
-    function setSidebar(city, callback) {
+    function setSidebar(city, provider, callback) {
 
-        var host = 'http://localhost/backend/?r=weather/forecast&city='+ city +'&pr=ya';
+        var host = 'http://localhost/backend/?r=weather/forecast&city='+ city +'&pr=' + provider;
 
         $.ajax({
             dataType:       "jsonp",
