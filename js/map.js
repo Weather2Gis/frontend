@@ -117,14 +117,14 @@ DG.then(function () {
                     return "#" + toHex(Math.abs(r-255)) + toHex(Math.abs(g-255)) + toHex(Math.abs(b-255));
                 };
 
-                $rgb = RGB(parseInt(ws_data.temp));
                 myDivIcons[id] = DG.divIcon({
                     iconSize: [30, 30],
                     className: '',
-                    html: '<div class="marker clickable cluster" style="border-top: 40px solid rgba('+
-                        $rgb[0] + ',' + $rgb[1] + ',' + $rgb[2] + ', .9); ' +
+                    html: '<div id="triangle" class="clickable" style="border-top: 40px solid rgb('+
+                        $rgb[0] + ',' + $rgb[1] + ',' + $rgb[2] + '); ' +
                         'color:'+invTextColor($rgb[0],$rgb[1],$rgb[2])+';" tabindex="0">'+
-                        '<div class="marker__temp">' + ws_data.temp + '&deg;</div></div>'
+                        '<div id="circle" style="background: rgb('+
+                        $rgb[0] + ',' + $rgb[1] + ',' + $rgb[2] + ');"></div>' +'<div class="marker__temp">'+ ws_data.temp + '&deg;</div></div>'
                 });
 
 
