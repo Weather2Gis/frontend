@@ -169,46 +169,88 @@ input:focus{
 
 /* Стили карточки */
 
-.cardWeatheradd{
+.card {
     position: absolute;
     width: 280px;
     left: 40px;
-    top: 202px;
+    top: 152px;
     color: #f0f0f0;
     background: #202020;
     opacity: .8;
-    vertical-align: text-top;
 }
-.cardWeahteradd__city{
+
+.card__city {
     text-align: center;
     padding-top: 15px;
     padding-bottom: 5px;
     font-size: 20px;
+    color: #ffe6aa;
 }
-.cardWeahteradd__box{
-    margin-left: 20px;
-    margin-right: 20px;
+.card__box {
+    margin: 0 15px;
+
     width: 240px;
-    height: 45px;
-    padding-top: 10px;
-    padding-bottom: 15px;
+    height: 55px;
+    padding-bottom: 20px;
     border-top: 3px solid #111 ;
+    display: inline-block;
 }
-.cardWeahteradd__temp{
-    text-align: right;
+.card__temp{
     font-size: 30px;
 }
-.cardWeahteradd__icon{
+
+.card__icon{
+    width: 60px;
+    height: 55px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.card__icon>img {
+    margin: 0 5px;
     width: 50px;
-    height: 50px;
-    float: left;
+    height: 55px;
 }
-.cardWeahteradd__info{
-    margin-left: 10px;
-    margin-top: 5px;
+
+.card__info {
     width: 100px;
-    height: 50px;
+    height: 45px;
+    display: inline-block;
+    vertical-align: bottom;
+    margin-left: 10px;
 }
-.cardWeahteradd__box_bottom {
+
+.card__info img {
+    width: 16px;
+    height: 16px;
+}
+
+.card__box_bottom {
     height: 60px;
+}
+
+.card__inline {
+    display: inline-block;
+    width: 60px;
+    vertical-align: bottom;
+    margin-top: 5px;
+}
+
+.info__humidity {
+    display: inline-block;
+}
+
+.info__pressure {
+    display: inline-block;
+    margin-left: 15px;
+}
+
+.info__wind_speed {
+    display: inline-block;
+    margin-top: 5px;
+}
+
+.wind_deg {
+    display: inline-block;
+    padding-left: 5px;
 }

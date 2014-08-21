@@ -1,25 +1,3 @@
-function setSidebar(city, callback) {
-    var host = 'http://localhost/frontend/?r=weather/forecast&city='+ city +'&=ya';
-
-    $.ajax({
-        dataType:       "jsonp",
-        url:            host,
-        async:          false,
-        jsonp:          false,
-        jsonpCallback:  "callback",
-        success:  function(data)
-        {
-            callback(data);
-        },
-        error: function(data)
-        {
-            callback(data);
-        }
-    });
-}
-
-
-
 DG.then(function () {
     var markers = DG.featureGroup();
     var urlData = getUrlData();
@@ -99,15 +77,6 @@ DG.then(function () {
         provider(markers, selectedProvider, north_west.lng, north_west.lat, south_east.lng, south_east.lat, 1, function(data, markers) {
             var coordinates = [];
             var myDivIcons = [];
-            var old_markers = $.extend(true, {}, markers);
-            var newMarkers = new DG.LayerGroup();
-            newMarkers.clearLayers();
-
-            var deletedMarkers = new DG.LayerGroup();
-            deletedMarkers.clearLayers();
-
-            var addedMarkers = new DG.LayerGroup();
-            addedMarkers.clearLayers();
 
             markers.clearLayers();
 
@@ -115,12 +84,17 @@ DG.then(function () {
                 coordinates[0] = ws_data.latitude;
                 coordinates[1] = ws_data.longitude;
 
+                id = ws_data.temp+50;
+
+                //Функция для преобразования из RGB в HEX
                 function toHex(c){
                     var hex = c.toString(16);
                     return hex.length == 1 ? "0" + hex : hex;
                 }
 
-                var HEX = function(t){
+                //Динамическое изменение цвета маркера в зависимости от температуры
+                var RGB = function(t)
+                {
                     t = t + 50;
                     var tone = 240;
                     var step = tone/20;
@@ -135,104 +109,80 @@ DG.then(function () {
                         if(r <= tone && g == tone && b == 0) r+=step;
                         if(r == tone && g >= 0 && b == 0) g-=step;
                     }
-
-                    return toHex(r) + toHex(g) + toHex(b);
+                    return [r, g, b];
                 };
 
-                myDivIcons[id = ws_data.temp+50] = DG.divIcon({
+                //Инверсия цвета текста отображаемой на маркере температуры
+                var invTextColor = function(r, g, b){
+                    return "#" + toHex(Math.abs(r-255)) + toHex(Math.abs(g-255)) + toHex(Math.abs(b-255));
+                };
+
+                $rgb = RGB(parseInt(ws_data.temp));
+                myDivIcons[id] = DG.divIcon({
                     iconSize: [30, 30],
                     className: '',
-                    html: '<div class="marker clickable cluster" style="border-top: 40px solid '+ '#'+ HEX(parseInt(ws_data.temp)) +';" tabindex="0">'+
+                    html: '<div class="marker clickable cluster" style="border-top: 40px solid rgba('+
+                        $rgb[0] + ',' + $rgb[1] + ',' + $rgb[2] + ', .9); ' +
+                        'color:'+invTextColor($rgb[0],$rgb[1],$rgb[2])+';" tabindex="0">'+
                         '<div class="marker__temp">' + ws_data.temp + '&deg;</div></div>'
                 });
 
-                DG.marker(coordinates, {icon: myDivIcons[id = ws_data.temp+50]}).addTo(markers).on('click', function() {
-                    $('#cards_city').empty().append($('#template_box_city').clone().html().replace("%city%", ws_data.city));
-                    $('#cards').empty();
+
+                DG.marker(coordinates, {icon: myDivIcons[id]}).addTo(markers).on('click', function() {
+                    $('#card__city').empty().append($('#template_box_city').clone().html().replace("%city%", ws_data.city));
+                    $('#card__weather').empty();
+
                     setSidebar(ws_data.city, function(data) {
                         for(i=0; i<4; i++) {
-                            $('#cards').append($('#template_box').clone().html()
-                                .replace("%partofday%", data[i].partofday)
+                            $('#template_box').children().attr("id", "box-" + i);
+                            $('#card__weather').append($('#template_box').clone().html()
+                                .replace("%partofday%", partOfDay[data[i].partofday])
                                 .replace("%temp%", data[i].temp)
                                 .replace("%humidity%", data[i].humidity)
                                 .replace("%pressure%", data[i].pressure)
                                 .replace("%wind_speed%", data[i].wind_speed));
-                        }
-                    });
-                });
-            });
 
-            /*$.each(markers.getLayers(), function(m_num, m_data) {
-                var coord = m_data.getLatLng();
-                $.each(old_markers.getLayers(), function(om_num, om_data) {
-                    if ( m_data.getLatLng().equals(om_data.getLatLng()) ) {
-                        newMarkers.addLayer(m_data); // Тут маркерые, которые уже есть на экране
-                    }
-                });
-            });
-
-            $.each(markers.getLayers(), function(m_num, m_data) {
-
-             var flag_add = true;
-
-             $.each(newMarkers.getLayers(), function(n_num, n_data) {
-             if ( m_data.getLatLng().equals(n_data.getLatLng()) ) {
-             flag_add = false;
-             }
-             });
-
-             if (flag_add) {
-             addedMarkers.addLayer(m_data);
-             }
-
-             });
-
-//            console.log(newMarkers.getLayers());
-//            console.log(markers.getLayers());
-
-            if ( newMarkers.getLayers() != false) {
-                //console.log(newMarkers.getLayers());
-                $.each(newMarkers.getLayers(), function(n_num, n_data) {
-                    var flag_deleted = true;
-
-                    $.each(markers.getLayers(), function(m_num, m_data) {
-                        if ( n_data.getLatLng().equals(m_data.getLatLng()) ) {
-                            flag_deleted = false;
+                            $('#box-' + i + '>.card__icon>img').attr('src', '/src/card/' + typeWeather[data[i].precipitation]);
+                            $('#box-' + i + ' .wind_deg').attr('src', '/src/card/' + windDeg[data[i].wind_deg]);
                         }
                     });
 
-                    if (flag_deleted) {
-                        deletedMarkers.addLayer(n_data);
-                    }
-
                 });
-            }
-            else {
-                $.each(markers.getLayers(), function(m_num, m_data) {
-                    deletedMarkers.addLayer(m_data);
-                });
-            }*/
-
-
-
-
-            /*
-             addLayer( <ILayer> layer )	this	Добавляет указанный слой в группу.
-             removeLayer( <ILayer> layer | <String> id )	this	Удаляет указанный слой из группы.
-             hasLayer( <ILayer> layer )
-             */
-            //console.log(deletedMarkers.getLayers());
-
-            //console.log("  ");
+            });
 
             markers.addTo(map);
         });
     }
 
 
+
     function toggleMenu(provider) {
         $('._selected').toggleClass('_selected');
         $('#' + provider).toggleClass('_selected');
+    }
+
+
+
+    function setSidebar(city, callback) {
+
+        var host = 'http://localhost/backend/?r=weather/forecast&city='+ city +'&pr=ya';
+
+        $.ajax({
+            dataType:       "jsonp",
+            url:            host,
+            async:          false,
+            jsonp:          false,
+            jsonpCallback:  "callback",
+            success:  function(data)
+            {
+                callback(data);
+            },
+            error: function(data)
+            {
+                callback(data);
+            }
+        });
+
     }
 
 });

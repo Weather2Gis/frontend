@@ -36,31 +36,41 @@
                 </div>
             </div>
 
-            <div class="cardWeatheradd">
-                <div id="cards_city"></div>
-                <div id="cards"></div>
+            <div class="card">
+                <div id="card__city"></div>
+                <div id="card__weather"></div>
             </div>
 
             <div style="display: none" id="template_box_city">
-                <div class="cardWeahteradd__city">%city%</div>
+                <div class="card__city">%city%</div>
             </div>
 
             <div style="display: none" id="template_box">
-                <div class="cardWeahteradd__box">
+                <div class="card__box">
 
-                    <div class="cardWeahteradd__inlane"style="float: left">
+                    <div class="card__inline">
                         <time>%partofday%</time>
-                        <div class="cardWeahteradd__temp">%temp%&deg;</div>
+                        <div class="card__temp">%temp%&deg;</div>
                     </div>
-                    <div class="cardWeahteradd__icon"><img src="/frontend/src/card/icon-weather-01.svg" width="50" height="50"></div>
-                    <div class="cardWeahteradd__info" style="float: left">
-                        <img src="/frontend/src/card/humidity.svg" width="16" height="16">%humidity%
-                        <img src="/frontend/src/card/pressure.svg" width="16" height="16">%pressure%<br>
-                        <img src="/frontend/src/card/wind_speed.svg" width="16" height="16"> %wind_speed% м.с
-                        <img src="/frontend/src/card/description-ne.svg" width="16" height="16">
+                    <div class="card__icon">
+                        <img>
+                    </div>
+
+                    <div class="card__info">
+                        <div class="info__humidity">
+                            <img src="/src/card/humidity.svg">%humidity%
+                        </div>
+                        <div class="info__pressure">
+                            <img src="/src/card/pressure.svg">%pressure%
+                        </div>
+                        <div class="info__wind_speed">
+                            <img src="/src/card/wind_speed.svg"> %wind_speed% м/с
+                        </div>
+                        <img class="wind_deg">
                     </div>
                 </div>
             </div>
+
         </div>
     </body>
 </html>
