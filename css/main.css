@@ -21,6 +21,9 @@ body {
     position: absolute;
 }
 
+input:focus{
+    outline:none;
+}
 
 
 /* Стили меню */
@@ -55,9 +58,9 @@ body {
 
 .selectors__button:hover { background-position: 0; }
 
-._ya { background-image: url('/frontend/src/ya.png'); }
-._ow { background-image: url('/frontend/src/ow.png'); }
-._wu { background-image: url('/frontend/src/wu.png'); }
+._ya { background-image: url('/src/ya.png'); }
+._ow { background-image: url('/src/ow.png'); }
+._wu { background-image: url('/src/wu.png'); }
 
 ._selected {
     background-position: 0;
@@ -133,4 +136,31 @@ body {
 .cardWeather__lieb {
     text-align: center;
     font-size: 11px;
+}
+
+
+
+/* Стили маркера */
+.cluster{
+    text-align: center;
+    color: black;
+    font: 13px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+.clickable{
+    cursor: pointer;
+    display: block;
+    outline: none;
+}
+.marker{
+    top: -24px;
+    position: relative;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+
+    border-radius: 30px;
+}
+.marker__temp{
+    position: absolute;
+    bottom: 22px;
+    right: -10px;
 }
