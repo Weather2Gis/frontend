@@ -58,9 +58,9 @@ input:focus{
 
 .selectors__button:hover { background-position: 0; }
 
-._ya { background-image: url('/src/ya.png'); }
-._ow { background-image: url('/src/ow.png'); }
-._wu { background-image: url('/src/wu.png'); }
+._ya { background-image: url('/frontend/src/menu/ya.png'); }
+._ow { background-image: url('/frontend/src/menu/ow.png'); }
+._wu { background-image: url('/frontend/src/menu/wu.png'); }
 
 ._selected {
     background-position: 0;
@@ -163,4 +163,52 @@ input:focus{
     position: absolute;
     bottom: 22px;
     right: -10px;
+}
+
+
+
+/* Стили карточки */
+
+.cardWeatheradd{
+    position: absolute;
+    width: 280px;
+    left: 40px;
+    top: 202px;
+    color: #f0f0f0;
+    background: #202020;
+    opacity: .8;
+    vertical-align: text-top;
+}
+.cardWeahteradd__city{
+    text-align: center;
+    padding-top: 15px;
+    padding-bottom: 5px;
+    font-size: 20px;
+}
+.cardWeahteradd__box{
+    margin-left: 20px;
+    margin-right: 20px;
+    width: 240px;
+    height: 45px;
+    padding-top: 10px;
+    padding-bottom: 15px;
+    border-top: 3px solid #111 ;
+}
+.cardWeahteradd__temp{
+    text-align: right;
+    font-size: 30px;
+}
+.cardWeahteradd__icon{
+    width: 50px;
+    height: 50px;
+    float: left;
+}
+.cardWeahteradd__info{
+    margin-left: 10px;
+    margin-top: 5px;
+    width: 100px;
+    height: 50px;
+}
+.cardWeahteradd__box_bottom {
+    height: 60px;
 }

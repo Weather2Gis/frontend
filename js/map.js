@@ -1,3 +1,25 @@
+function setSidebar(city, callback) {
+    var host = 'http://localhost/frontend/?r=weather/forecast&city='+ city +'&=ya';
+
+    $.ajax({
+        dataType:       "jsonp",
+        url:            host,
+        async:          false,
+        jsonp:          false,
+        jsonpCallback:  "callback",
+        success:  function(data)
+        {
+            callback(data);
+        },
+        error: function(data)
+        {
+            callback(data);
+        }
+    });
+}
+
+
+
 DG.then(function () {
     var markers = DG.featureGroup();
     var urlData = getUrlData();
@@ -124,10 +146,23 @@ DG.then(function () {
                         '<div class="marker__temp">' + ws_data.temp + '&deg;</div></div>'
                 });
 
-                DG.marker(coordinates, {icon: myDivIcons[id = ws_data.temp+50]}).addTo(markers);
+                DG.marker(coordinates, {icon: myDivIcons[id = ws_data.temp+50]}).addTo(markers).on('click', function() {
+                    $('#cards_city').empty().append($('#template_box_city').clone().html().replace("%city%", ws_data.city));
+                    $('#cards').empty();
+                    setSidebar(ws_data.city, function(data) {
+                        for(i=0; i<4; i++) {
+                            $('#cards').append($('#template_box').clone().html()
+                                .replace("%partofday%", data[i].partofday)
+                                .replace("%temp%", data[i].temp)
+                                .replace("%humidity%", data[i].humidity)
+                                .replace("%pressure%", data[i].pressure)
+                                .replace("%wind_speed%", data[i].wind_speed));
+                        }
+                    });
+                });
             });
 
-            $.each(markers.getLayers(), function(m_num, m_data) {
+            /*$.each(markers.getLayers(), function(m_num, m_data) {
                 var coord = m_data.getLatLng();
                 $.each(old_markers.getLayers(), function(om_num, om_data) {
                     if ( m_data.getLatLng().equals(om_data.getLatLng()) ) {
@@ -136,7 +171,7 @@ DG.then(function () {
                 });
             });
 
-            /*$.each(markers.getLayers(), function(m_num, m_data) {
+            $.each(markers.getLayers(), function(m_num, m_data) {
 
              var flag_add = true;
 
@@ -150,7 +185,7 @@ DG.then(function () {
              addedMarkers.addLayer(m_data);
              }
 
-             });*/
+             });
 
 //            console.log(newMarkers.getLayers());
 //            console.log(markers.getLayers());
@@ -176,7 +211,7 @@ DG.then(function () {
                 $.each(markers.getLayers(), function(m_num, m_data) {
                     deletedMarkers.addLayer(m_data);
                 });
-            }
+            }*/
 
 
 

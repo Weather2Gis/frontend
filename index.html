@@ -3,12 +3,13 @@
     <head>
         <title>Самый мощный агрегатор погоды IN THE WORLD</title>
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-        <link rel="icon" type="image/png" href="">
+        <link rel="icon" type="image/x-icon" href="/frontend/src/favicon.ico">
 
         <!-- Подключаем JavaScript -->
         <script src="http://maps.api.2gis.ru/2.0/loader.js?pkg=full" data-id="dgLoader"></script>
         <script src="/frontend/js/jquery-1.11.1.js"></script>
         <script src="/frontend/js/url.js"></script>
+        <script src="/frontend/js/card.js"></script>
         <script src="/frontend/js/cookie.js"></script>
         <script src="/frontend/js/city.js"></script>
         <script src="/frontend/js/map.js"></script>
@@ -22,6 +23,11 @@
         <div class="application">
             <div id="map" class="map"></div>
 
+            <div class="search">
+                <input class="search__input" type="text" />
+                <div class="search__submit">Искать</div>
+            </div>
+
             <div class="menu">
                 <div class="menu__selectors">
                     <div id="ya" class="selectors__button _ya"></div>
@@ -30,9 +36,30 @@
                 </div>
             </div>
 
-            <div class="search">
-                <input class="search__input" type="text" />
-                <div class="search__submit">Искать</div>
+            <div class="cardWeatheradd">
+                <div id="cards_city"></div>
+                <div id="cards"></div>
+            </div>
+
+            <div style="display: none" id="template_box_city">
+                <div class="cardWeahteradd__city">%city%</div>
+            </div>
+
+            <div style="display: none" id="template_box">
+                <div class="cardWeahteradd__box">
+
+                    <div class="cardWeahteradd__inlane"style="float: left">
+                        <time>%partofday%</time>
+                        <div class="cardWeahteradd__temp">%temp%&deg;</div>
+                    </div>
+                    <div class="cardWeahteradd__icon"><img src="/frontend/src/card/icon-weather-01.svg" width="50" height="50"></div>
+                    <div class="cardWeahteradd__info" style="float: left">
+                        <img src="/frontend/src/card/humidity.svg" width="16" height="16">%humidity%
+                        <img src="/frontend/src/card/pressure.svg" width="16" height="16">%pressure%<br>
+                        <img src="/frontend/src/card/wind_speed.svg" width="16" height="16"> %wind_speed% м.с
+                        <img src="/frontend/src/card/description-ne.svg" width="16" height="16">
+                    </div>
+                </div>
             </div>
         </div>
     </body>
