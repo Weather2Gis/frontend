@@ -117,6 +117,7 @@ DG.then(function () {
                     return "#" + toHex(Math.abs(r-255)) + toHex(Math.abs(g-255)) + toHex(Math.abs(b-255));
                 };
 
+                $rgb = RGB(parseInt(ws_data.temp));
                 myDivIcons[id] = DG.divIcon({
                     iconSize: [30, 30],
                     className: '',
