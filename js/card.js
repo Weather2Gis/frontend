@@ -45,6 +45,9 @@ var typeWeather = {
     "Дождь/снегопад" : "icon-weather-08.svg",
     "Местами небольшой кратковременный дождь/ветер" : "icon-weather-11.svg"
 }
+
+
+
 var windDeg = {
     "Северный": "description-n.svg",
     "Северо-западный": "description-nw.svg",
@@ -54,4 +57,13 @@ var windDeg = {
     "Юго-восточный": "description-se.svg",
     "Восточный": "description-e.svg",
     "Северо-восточный": "description-ne.svg"
+}
+
+
+
+var partOfDay = {
+    1 : "Утром",
+    2 : "Днем",
+    3 : "Вечером",
+    4 : "Ночью"
 }
