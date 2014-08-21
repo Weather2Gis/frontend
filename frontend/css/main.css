@@ -130,7 +130,7 @@ input:focus{
 /*Стили маркера*/
 .cluster{
     text-align: center;
-    color: white;
+    color: black;
     font: 13px "Helvetica Neue", Arial, Helvetica, sans-serif;
 }
 .clickable{
@@ -143,7 +143,7 @@ input:focus{
     position: relative;
     border-left: 15px solid transparent;
     border-right: 15px solid transparent;
-    border-top: 40px solid rgba(51, 51, 51, 0.9);
+
     border-radius: 30px;
 }
 .marker__temp{

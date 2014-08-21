@@ -37,8 +37,7 @@ DG.then(function () {
     });
 
 
-
-    // Вешаем на собития перемещения карты, изменения зума и изменения размера окна подгрузку новых данных
+        // Вешаем на собития перемещения карты, изменения зума и изменения размера окна подгрузку новых данных
     map.on('load resize movestart viewreset', function () {
         var current_map_position = map.getBounds();
         var north_west = current_map_position.getNorthWest(); // Получаем координаты левой верхней точки
@@ -46,19 +45,47 @@ DG.then(function () {
 
         provider(markers, 1, north_west.lng, north_west.lat, south_east.lng, south_east.lat, 1, function(data, markers) {
             var coordinates = [];
+
             markers.clearLayers();
 
+            var myDivIcons = [];
             $.each(data, function(ws_num, ws_data) {
                 coordinates[0] = ws_data.latitude;
                 coordinates[1] = ws_data.longitude;
-                var myDivIcon = DG.divIcon({
+
+                function toHex(c){
+                    var hex = c.toString(16);
+                    return hex.length == 1 ? "0" + hex : hex;
+                }
+
+                var HEX = function(t){
+                    t = t + 50;
+                    var tone = 240;
+                    var step = tone/20;
+                    var r = tone;
+                    var g = 0;
+                    var b = tone;
+
+                    for(i=0; i<t; i++){
+                        if(r <= tone && g == 0 && b == tone) r-=step;
+                        if(r == 0 && g <= tone && b == tone) g+=step;
+                        if(r == 0 && g == tone && b >= 0) b-=step;
+                        if(r <= tone && g == tone && b == 0) r+=step;
+                        if(r == tone && g >= 0 && b == 0) g-=step;
+                    }
+
+                    return toHex(r) + toHex(g) + toHex(b);
+                };
+
+                myDivIcons[id = ws_data.temp+50] = DG.divIcon({
                     iconSize: [30, 30],
                     className: '',
-                    html: '<div class="marker clickable cluster" tabindex="0">'+
+                    html: '<div class="marker clickable cluster" style="border-top: 40px solid '+ '#'+ HEX(parseInt(ws_data.temp)) +';" tabindex="0">'+
                     '<div class="marker__temp">' + ws_data.temp + '&deg;</div></div>'
                 });
+
                 //console.log(ws_data);
-                DG.marker(coordinates,{icon: myDivIcon}).addTo(markers).bindPopup('<div class="cardWeather__city">' + ws_data.city + '</div>' +
+                DG.marker(coordinates,{icon: myDivIcons[id = ws_data.temp+50]}).addTo(markers).bindPopup('<div class="cardWeather__city">' + ws_data.city + '</div>' +
                     '<div class="cardWeather__temp">' + ws_data.temp + '</div>' +
                     '<div class="cardWeather__info">Влажность: ' + ws_data.humidity +
                     '<br>Давление: ' + ws_data.pressure +
