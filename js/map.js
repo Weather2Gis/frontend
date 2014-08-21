@@ -14,7 +14,10 @@ DG.then(function () {
 
     map.on('load', function () { refreshData(); });
 
-    map.setView(urlData.center || [54.98, 82.89], urlData.zoom || 10);
+    if (urlData)
+        map.setView(urlData.center, urlData.zoom);
+    else
+        map.setView([54.98, 82.89], 10);
 
     // Вешаем на собития перемещения карты, изменения зума и изменения размера окна подгрузку новых данных
     map.on('resize movestart viewreset', function () { refreshData(); });
